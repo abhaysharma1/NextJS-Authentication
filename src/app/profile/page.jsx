@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 function profile() {
   const router = useRouter();
+  const [data,setData] = useState("nothing")
 
   const Logout = async () => {
     try {
@@ -17,6 +18,12 @@ function profile() {
       toast.error(error);
     }
   };
+
+  const getUserDetails = async ()=>{
+    const userdata = await axios.get("/api/users/me")
+    console.log(data.data)
+    setData(userdata.data.data._id)
+  }
 
   return (
     <div>
