@@ -4,18 +4,20 @@ export async function connect() {
 
     let isConnected = false;
 
-    try {
-
-        if(isConnected){
+    if(isConnected){
             return
         }
+
+    try {
+
+        
         
         await mongoose.connect(process.env.MONGO_URL); 
         const connection = mongoose.connection;
 
         isConnected = true;
 
-        connection.on('connected',()=>{
+        connection.once('connected',()=>{
             console.log("MongoDb Connected Successfully")
         })
 
