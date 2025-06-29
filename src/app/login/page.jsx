@@ -104,6 +104,9 @@ function LoginPage() {
             >
               {processing ? "Processing" : "LogIn"}
             </button>
+            <Link href="/forgotpassword" className="ml-5">
+              Forgot Password
+            </Link>
             <Link href="/signup" className="ml-5">
               Go to SignUp
             </Link>

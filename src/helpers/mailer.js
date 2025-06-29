@@ -17,7 +17,7 @@ export const sendEmail = async ({ email, emailType, userId }) => {
     } else if (emailType === "RESET") {
       await User.findByIdAndUpdate(userId, {
         forgotPasswordToken: hashedToken,
-        forgotPasswordTokenExpiry: Date.now() + 3600000,
+        forgotPasswordExpiry: Date.now() + 3600000,
       });
     }
     var transporter = nodemailer.createTransport({
@@ -36,7 +36,7 @@ export const sendEmail = async ({ email, emailType, userId }) => {
         emailType === "VERIFY" ? "Verify Your Email" : "Reset Your Password",
       html: `<p> Click <a href="${
         process.env.DOMAIN
-      }/verifyemail?token=${hashedToken}">Here</a> to ${
+      }/${emailType === "VERIFY" ? "verifyemail" : "resetpassword"}?token=${hashedToken}">Here</a> to ${
         emailType === "VERIFY" ? "Verify Your Email" : "Reset Your Password"
       } </p>`,
     });
